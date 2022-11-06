@@ -1,0 +1,32 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const posts = await Astro.glob("./*.mdx");
+---
+
+<BaseLayout>
+  <h1>Blog</h1>
+  <div class="posts">
+    {
+      posts.map((post) => (
+        <article>
+          <h1>{post.frontmatter.title}</h1>
+          <p>{post.frontmatter.description}</p>
+          <a href={post.url}>Read more</a>
+        </article>
+      ))
+    }
+  </div>
+</BaseLayout>
+
+<style>
+  .posts {
+    display: flex;
+  }
+
+  article {
+    padding: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 0.5rem;
+  }
+</style>
