@@ -1,4 +1,5 @@
 ---
+import "../css/base.css";
 import Nav from "../components/Nav.astro";
 const { frontmatter } = Astro.props;
 ---
@@ -18,9 +19,3 @@ const { frontmatter } = Astro.props;
     <slot />
   </body>
 </html>
-
-<style>
-  img {
-    max-width: 100%;
-  }
-</style>
