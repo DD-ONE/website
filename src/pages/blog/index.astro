@@ -1,32 +1,82 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import HeaderBlog from "../../components/blog/HeaderBlog.astro";
+import BlogPost from "../../components/blog/BlogPost.astro";
+import Categories from "../../components/blog/Categories.astro";
 
 const posts = await Astro.glob("./*.mdx");
+console.log(posts[0].frontmatter.thumbnail);
 ---
 
 <BaseLayout>
-  <h1>Blog</h1>
-  <div class="posts">
-    {
-      posts.map((post) => (
-        <article>
-          <h1>{post.frontmatter.title}</h1>
-          <p>{post.frontmatter.description}</p>
-          <a href={post.url}>Read more</a>
-        </article>
-      ))
-    }
+  <HeaderBlog />
+  <div class="wrapper">
+    <div class="blog-list">
+      <div class="grid-posts">
+        {
+          posts.map((post) => {
+            const postUrl = post.url || "";
+            return (
+              <BlogPost
+                title={post.frontmatter.title}
+                image={post.frontmatter.thumbnail}
+                url={postUrl}
+              />
+            );
+          })
+        }
+      </div>
+      <button>VIEW MORE</button>
+    </div>
+    <Categories />
   </div>
 </BaseLayout>
 
 <style>
-  .posts {
+  .wrapper {
     display: flex;
+    flex-direction: row;
+    gap: 48px;
+    justify-content: space-between;
   }
 
-  article {
-    padding: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 0.5rem;
+  .blog-list {
+    padding: 16px;
+    background: var(--background);
+    width: fit-content;
+  }
+
+  .blog-list button {
+    margin-top: 48px;
+    background: var(--gradient-pink-purple);
+    width: 100%;
+  }
+
+  .blog-list button:hover {
+    background: var(--gradient-purple-pink);
+  }
+
+  .grid-posts {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 32px;
+    grid-row-gap: 48px;
+  }
+
+  @media only screen and (max-width: 768px) {
+    .wrapper {
+      gap: 32px;
+    }
+
+    .grid-posts {
+      grid-template-columns: repeat(1, 1fr);
+    }
+  }
+
+  @media only screen and (max-width: 650px) {
+    .wrapper {
+      flex-direction: column-reverse;
+      align-items: center;
+    }
   }
 </style>
