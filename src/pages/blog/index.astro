@@ -1,6 +1,9 @@
 ---
 import { getAllPostsSSR } from "../../db/posts/getAllPosts";
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import HeaderBlog from "../../components/blog/HeaderBlog.astro";
+import BlogPost from "../../components/blog/BlogPost.astro";
+import Categories from "../../components/blog/Categories.astro";
 
 const posts = await getAllPostsSSR(Astro);
 ---
@@ -19,3 +22,15 @@ const posts = await getAllPostsSSR(Astro);
     </ul>
   </div>
 </BaseLayout>
+
+<style>
+  .posts {
+    display: flex;
+  }
+
+  article {
+    padding: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 0.5rem;
+  }
+</style>

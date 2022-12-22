@@ -1,0 +1,83 @@
+<div class="category-blog">
+  <div class="category-title">
+    <p class="title">Press Tools</p>
+  </div>
+  <div class="category-list">
+    <ul>
+      <li>Lorem ipsum</li>
+      <li>Lorem ipsum</li>
+      <li>Lorem ipsum</li>
+      <li>Lorem ipsum</li>
+      <li>Lorem ipsum</li>
+    </ul>
+  </div>
+</div>
+
+<style>
+  .category-blog {
+    display: flex;
+    flex-direction: column;
+
+    min-width: 180px;
+  }
+
+  .category-title {
+    background: var(--gradient-pink-purple);
+    height: 100px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .category-title .title {
+    font-weight: 500;
+    background: var(--background);
+    padding: 8px 16px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+    width: fit-content;
+    position: relative;
+    left: -48px;
+  }
+  .category-list {
+    background: var(--white);
+    color: var(--dark);
+
+    padding: 24px;
+  }
+
+  .category-list ul {
+    list-style: none;
+  }
+
+  .category-list ul li {
+    cursor: pointer;
+  }
+
+  @media only screen and (max-width: 650px) {
+    .category-blog {
+      width: 80%;
+    }
+    .category-list ul {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-column-gap: 48px;
+    }
+
+    .category-title .title {
+      left: -120px;
+    }
+  }
+
+  @media only screen and (max-width: 420px) {
+    .category-list ul {
+      display: grid;
+      grid-template-columns: repeat(1, 1fr);
+    }
+
+    .category-title .title {
+      left: -48px;
+    }
+  }
+</style>
