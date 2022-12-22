@@ -1,0 +1,15 @@
+---
+import { getPostSSR } from "../../../db/posts/getPost";
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+
+const { id } = Astro.params;
+const post = await getPostSSR({ context: Astro, id: parseInt(id || "") });
+if (!post) return Astro.redirect("/404");
+---
+
+<BaseLayout>
+  <div class="wrapper">
+    <h1>{post.title}</h1>
+    <p>{post.body}</p>
+  </div>
+</BaseLayout>

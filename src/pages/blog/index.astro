@@ -1,29 +1,21 @@
 ---
+import { getAllPostsSSR } from "../../db/posts/getAllPosts";
 import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const posts = await getAllPostsSSR(Astro);
 ---
 
 <BaseLayout>
-  <h1>Blog</h1>
-  <div class="posts">
-    <article>
-      <h2>My First Post</h2>
-      <p>Some content</p>
-    </article>
-    <article>
-      <h2>My Second Post</h2>
-      <p>Some content</p>
-    </article>
+  <div class="wrapper">
+    <h1>Posts</h1>
+    <ul>
+      {
+        posts.map((post) => (
+          <li>
+            <a href={`/blog/posts/${post.id}`}>{post.title}</a>
+          </li>
+        ))
+      }
+    </ul>
   </div>
 </BaseLayout>
-
-<style>
-  .posts {
-    display: flex;
-  }
-
-  article {
-    padding: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 0.5rem;
-  }
-</style>
