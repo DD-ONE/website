@@ -1,6 +1,7 @@
 ---
 import "../css/base.css";
 import Nav from "../components/Nav.astro";
+import Auth from "../components/Auth.svelte";
 ---
 
 <html lang="en">
@@ -12,6 +13,7 @@ import Nav from "../components/Nav.astro";
     <title>DeadDrop.One</title>
   </head>
   <body>
+    <Auth client:load />
     <Nav />
     <slot />
   </body>

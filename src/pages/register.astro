@@ -1,0 +1,21 @@
+---
+import { checkSession } from "../db/session/checkSession";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Register from "../components/RegisterAndLogin.svelte";
+
+const isLoggedin = await checkSession(Astro);
+if (isLoggedin) return Astro.redirect("/");
+---
+
+<BaseLayout>
+  <div class="wrapper">
+    <h1>Register</h1>
+    <Register client:load mode="register" />
+  </div>
+</BaseLayout>
+
+<style>
+  :global(html, body) {
+    height: 100%;
+  }
+</style>

@@ -1,0 +1,20 @@
+---
+import { checkSession } from "../../db/session/checkSession";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const isLoggedin = await checkSession(Astro);
+if (!isLoggedin) return Astro.redirect("/login");
+---
+
+<BaseLayout>
+  <div class="wrapper">
+    <h1>Admin</h1>
+    <a href="/admin/posts/">Manage Posts</a>
+  </div>
+</BaseLayout>
+
+<style>
+  h1 {
+    margin-bottom: 1rem;
+  }
+</style>

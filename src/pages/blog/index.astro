@@ -1,82 +1,36 @@
 ---
+import { getAllPostsSSR } from "../../db/posts/getAllPosts";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import HeaderBlog from "../../components/blog/HeaderBlog.astro";
 import BlogPost from "../../components/blog/BlogPost.astro";
 import Categories from "../../components/blog/Categories.astro";
 
-const posts = await Astro.glob("./*.mdx");
-console.log(posts[0].frontmatter.thumbnail);
+const posts = await getAllPostsSSR(Astro);
 ---
 
 <BaseLayout>
-  <HeaderBlog />
   <div class="wrapper">
-    <div class="blog-list">
-      <div class="grid-posts">
-        {
-          posts.map((post) => {
-            const postUrl = post.url || "";
-            return (
-              <BlogPost
-                title={post.frontmatter.title}
-                image={post.frontmatter.thumbnail}
-                url={postUrl}
-              />
-            );
-          })
-        }
-      </div>
-      <button>VIEW MORE</button>
-    </div>
-    <Categories />
+    <h1>Posts</h1>
+    <ul>
+      {
+        posts.map((post) => (
+          <li>
+            <a href={`/blog/posts/${post.id}`}>{post.title}</a>
+          </li>
+        ))
+      }
+    </ul>
   </div>
 </BaseLayout>
 
 <style>
-  .wrapper {
+  .posts {
     display: flex;
-    flex-direction: row;
-    gap: 48px;
-    justify-content: space-between;
   }
 
-  .blog-list {
-    padding: 16px;
-    background: var(--background);
-    width: fit-content;
-  }
-
-  .blog-list button {
-    margin-top: 48px;
-    background: var(--gradient-pink-purple);
-    width: 100%;
-  }
-
-  .blog-list button:hover {
-    background: var(--gradient-purple-pink);
-  }
-
-  .grid-posts {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-gap: 32px;
-    grid-row-gap: 48px;
-  }
-
-  @media only screen and (max-width: 768px) {
-    .wrapper {
-      gap: 32px;
-    }
-
-    .grid-posts {
-      grid-template-columns: repeat(1, 1fr);
-    }
-  }
-
-  @media only screen and (max-width: 650px) {
-    .wrapper {
-      flex-direction: column-reverse;
-      align-items: center;
-    }
+  article {
+    padding: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 0.5rem;
   }
 </style>

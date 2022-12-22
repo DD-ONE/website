@@ -1,0 +1,18 @@
+---
+import AddPost from "../../../components/admin/AddPost.svelte";
+import { getPostSSR } from "../../../db/posts/getPost";
+import { checkSession } from "../../../db/session/checkSession";
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+
+const { id } = Astro.params;
+const isLoggedin = await checkSession(Astro);
+if (!isLoggedin) return Astro.redirect("/login");
+const post = await getPostSSR({ context: Astro, id: parseInt(id || "") });
+if (!post) return Astro.redirect("/404");
+---
+
+<BaseLayout>
+  <div class="wrapper">
+    <AddPost client:load post={post} />
+  </div>
+</BaseLayout>
