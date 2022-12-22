@@ -1,0 +1,8 @@
+---
+import { checkSession } from "../../db/session/checkSession";
+
+const isLoggedin = await checkSession(Astro);
+if (!isLoggedin) return Astro.redirect("/login");
+---
+
+<h1>Admin</h1>

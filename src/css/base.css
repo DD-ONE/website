@@ -4,8 +4,23 @@
   padding: 0;
 }
 
+:root {
+  --text-primary: #fff;
+  --primary-900: #282a36;
+  --section-padding: 3em;
+}
+
 html {
   min-height: 100%;
+}
+
+body {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 140%;
+  color: var(--text-primary);
+  background-color: var(--primary-900);
 }
 
 a {
